@@ -101,71 +101,13 @@ Just clean, understandable code.
 
 ---
 
-## 📁 Project Structure
 
-```bash
-Portfolioo/
-├── public/
-│   ├── favicon.ico
-│   └── assets/
-│       ├── images/
-│       └── icons/
-│
-├── src/
-│   ├── components/
-│   │   ├── Navbar.tsx
-│   │   ├── Hero.tsx
-│   │   ├── About.tsx
-│   │   ├── Projects.tsx
-│   │   ├── Contact.tsx
-│   │   └── Footer.tsx
-│   │
-│   ├── pages/
-│   │   ├── Home.tsx
-│   │   └── NotFound.tsx
-│   │
-│   ├── styles/
-│   │   └── globals.css
-│   │
-│   ├── data/
-│   │   └── projects.ts
-│   │
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── index.css
-│
-├── .gitignore
-├── index.html
-├── package.json
-├── postcss.config.js
-├── tailwind.config.js
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
-```
----
 
-👤 Author
-## Puskar Nath
-<br></br>
+## 🚀 How to Run Locally
 
-Frontend Developer • UI Engineer • Motion-driven Web Enthusiast
+1. Clone the repository
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
 
-🌐 Portfolio: https://puskar.dev
-
-💼 GitHub: https://github.com/Puskar2Sora
-
-🔗 LinkedIn: https://www.linkedin.com/in/puskar-nath
-
-🙌 Credits & Acknowledgements
-
-This project was designed and developed from scratch with a strong focus on:
-
-✨ Clean UI & smooth interactions
-
-🧩 Modular, scalable component architecture
-  
-  
-⚡ Performance-first development with modern tooling
 
 
