@@ -170,7 +170,10 @@
   <!-- RESULT -->
   <section class="card hidden" id="result">
     <h2 class="section-title">Semester Result Summary</h2>
-
+<button onclick="getSGPAAIAdvice()" class="btn-primary">
+   AI Advise
+</button>
+<br/><br/>
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
       <div class="stat">
         <p>Total Credits</p>
@@ -196,8 +199,13 @@
         <p>CGPA</p>
         <span id="cgpa"></span>
       </div>
-    </div>
+    </div> 
   </section>
+<section id="aiResult" class="card hidden">
+  <h2 class="section-title">🤖 AI SGPA Improvement Report</h2>
+  <pre id="aiText" class="whitespace-pre-wrap text-sm"></pre>
+</section>
+
 
 </main>
 

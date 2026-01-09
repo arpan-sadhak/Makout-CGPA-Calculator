@@ -1,3 +1,5 @@
+
+
 const apiLoader = document.getElementById("apiLoader");
 
 function showLoader() {
@@ -326,5 +328,48 @@ themeToggle.addEventListener("change", () => {
     localStorage.setItem("theme", "light");
   }
 });
+async function getSGPAAIAdvice() {
+  const aiTextEl = document.getElementById("aiText");
+  const aiSection = document.getElementById("aiResult");
 
+  if (!aiTextEl || !aiSection) {
+    alert("AI UI not ready");
+    return;
+  }
 
+  const cur = semesterData[currentSemester];
+
+  if (!cur || !cur.sgpa || !cur.subjects?.length) {
+    alert("Please calculate SGPA first.");
+    return;
+  }
+
+  try {
+    showLoader();
+
+    const res = await fetch(
+      "https://makout-back.onrender.com/api/sgpa-ai",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sgpa: Number(cur.sgpa),
+          semester: currentSemester,
+          subjects: cur.subjects
+        })
+      }
+    );
+
+    const data = await res.json();
+    hideLoader();
+
+    aiTextEl.innerText =
+      data.advice || "No AI advice generated.";
+    aiSection.classList.remove("hidden");
+
+  } catch (err) {
+    hideLoader();
+    console.error(err);
+    alert("AI failed. Try again.");
+  }
+}
