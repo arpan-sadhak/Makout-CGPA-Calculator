@@ -242,7 +242,7 @@ Backend API runs via <code>server.js</code>.
 <h2>👤 Author</h2>
 
 <p>
-<b>Puskar Nath   Arpan Sadhak   Roumik Ghosh   Shayak Sarkar </b><br/>
+<b><pre>Puskar Nath   Arpan Sadhak   Roumik Ghosh   Shayak Sarkar </pre>pre></b><br/>
 Full-Stack Developer • Frontend + Backend • API Architect
 </p>
 
