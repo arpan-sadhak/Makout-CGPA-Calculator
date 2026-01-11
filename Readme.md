@@ -242,14 +242,8 @@ Backend API runs via <code>server.js</code>.
 <h2>👤 Author</h2>
 
 <p>
-<b>Puskar Nath</b><br/>
+<b>Puskar Nath   Arpan Sadhak   Roumik Ghosh   Shayak Sarkar </b><br/>
 Full-Stack Developer • Frontend + Backend • API Architect
-</p>
-
-<p>
-🌐 Portfolio: https://puskar.dev <br/>
-💼 GitHub: https://github.com/Puskar2Sora <br/>
-🔗 LinkedIn: https://www.linkedin.com/in/puskar-nath
 </p>
 
 <hr/>
