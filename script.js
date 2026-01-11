@@ -1,4 +1,5 @@
 
+import DOMPurify from "dompurify";
 
 const apiLoader = document.getElementById("apiLoader");
 
@@ -362,9 +363,10 @@ async function getSGPAAIAdvice() {
 
     const data = await res.json();
     hideLoader();
+aiTextEl.innerHTML = DOMPurify.sanitize(
+  data.advice || "<div class='ai-report'>No AI advice generated.</div>"
+);
 
-    aiTextEl.innerText =
-      data.advice || "No AI advice generated.";
     aiSection.classList.remove("hidden");
 
   } catch (err) {

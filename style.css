@@ -1579,3 +1579,132 @@ html.dark .note {
 .dark .api-loader {
   background: rgba(0, 0, 0, 0.65);
 }
+
+
+
+
+/* =========================
+   AI Advice UI (Minimal Clean)
+========================= */
+
+.ai-report {
+  width: 100%;
+  border-radius: 18px;
+  padding: 18px;
+  background: #070b16;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  color: #e7eefc;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+.ai-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ai-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.ai-badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8ab4ff;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+}
+
+.ai-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.ai-metric {
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ai-label {
+  font-size: 12px;
+  color: rgba(231, 238, 252, 0.65);
+  margin-bottom: 6px;
+}
+
+.ai-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: #6ea8ff;
+}
+
+.ai-panels {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ai-panel {
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ai-panel-title {
+  font-weight: 800;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.ai-list {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(231, 238, 252, 0.78);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.ai-actions {
+  margin-top: 14px;
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  background: linear-gradient(
+    120deg,
+    rgba(16, 185, 129, 0.12),
+    rgba(255, 255, 255, 0.03)
+  );
+}
+
+.ai-actions-title {
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #b8ffe8;
+}
+
+.ai-actions-list {
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(231, 238, 252, 0.85);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .ai-grid { grid-template-columns: 1fr; }
+  .ai-panels { grid-template-columns: 1fr; }
+}
