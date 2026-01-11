@@ -1,5 +1,3 @@
-
-
 const apiLoader = document.getElementById("apiLoader");
 
 function showLoader() {
@@ -363,9 +361,9 @@ async function getSGPAAIAdvice() {
     const data = await res.json();
     hideLoader();
 
-    aiTextEl.innerText =
-      data.advice || "No AI advice generated.";
-    aiSection.classList.remove("hidden");
+aiTextEl.innerHTML = DOMPurify.sanitize(
+  data.advice || "<div class='ai-report'>No AI advice generated.</div>"
+);    aiSection.classList.remove("hidden");
 
   } catch (err) {
     hideLoader();
