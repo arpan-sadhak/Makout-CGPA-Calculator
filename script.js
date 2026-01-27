@@ -1,5 +1,3 @@
-
-
 const apiLoader = document.getElementById("apiLoader");
 
 function showLoader() {
@@ -363,9 +361,9 @@ async function getSGPAAIAdvice() {
     const data = await res.json();
     hideLoader();
 
-    aiTextEl.innerText =
-      data.advice || "No AI advice generated.";
-    aiSection.classList.remove("hidden");
+aiTextEl.innerHTML = DOMPurify.sanitize(
+  data.advice || "<div class='ai-report'>No AI advice generated.</div>"
+);    aiSection.classList.remove("hidden");
 
   } catch (err) {
     hideLoader();
@@ -373,3 +371,166 @@ async function getSGPAAIAdvice() {
     alert("AI failed. Try again.");
   }
 }
+function generatePDF() {
+  try {
+    const cur = semesterData[currentSemester];
+
+    if (!cur || !cur.sgpa || !cur.subjects || cur.subjects.length === 0) {
+      alert("Please calculate SGPA first before downloading PDF.");
+      return;
+    }
+
+    // ✅ Collect student details
+    const studentName = document.getElementById("studentName")?.value || "N/A";
+    const roll = document.getElementById("rollNumber")?.value || "N/A";
+    const reg = document.getElementById("regNumber")?.value || "N/A";
+    const college = document.getElementById("collegeName")?.value || "N/A";
+    const stream = document.getElementById("stream")?.value || "N/A";
+
+    // ✅ Build HTML for PDF
+    const pdfBox = document.getElementById("pdfTemplate");
+
+    const subjectRows = cur.subjects
+      .map(
+        (s, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td>${s.name}</td>
+          <td>${s.credit}</td>
+          <td>${s.grade}</td>
+        </tr>
+      `
+      )
+      .join("");
+
+    pdfBox.innerHTML = `
+      <div style="
+        font-family: Arial, sans-serif;
+        padding: 28px;
+        color: #0f172a;
+        width: 100%;
+      ">
+        
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <h1 style="margin:0; font-size: 22px;">MAKAUT Grade Card (Unofficial)</h1>
+            <p style="margin:6px 0 0; color:#475569; font-size:13px;">
+              Generated from MAKAUT CGPA Calculator
+            </p>
+          </div>
+          <div style="
+            padding:10px 14px;
+            border-radius:10px;
+            border:1px solid #cbd5e1;
+            font-weight:700;
+            font-size:13px;
+            background:#f8fafc;
+          ">
+            Semester ${currentSemester}
+          </div>
+        </div>
+
+        <hr style="margin:18px 0; border:none; border-top:1px solid #e2e8f0;" />
+
+        <h2 style="margin: 0 0 10px; font-size: 16px;">Student Details</h2>
+        <table style="width:100%; border-collapse:collapse; font-size:13px;">
+          <tr>
+            <td style="padding:6px 0; color:#475569;">Name</td>
+            <td style="padding:6px 0; font-weight:600;">${studentName}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0; color:#475569;">Roll No</td>
+            <td style="padding:6px 0; font-weight:600;">${roll}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0; color:#475569;">Registration No</td>
+            <td style="padding:6px 0; font-weight:600;">${reg}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0; color:#475569;">College</td>
+            <td style="padding:6px 0; font-weight:600;">${college}</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 0; color:#475569;">Stream</td>
+            <td style="padding:6px 0; font-weight:600;">${stream}</td>
+          </tr>
+        </table>
+
+        <hr style="margin:18px 0; border:none; border-top:1px solid #e2e8f0;" />
+
+        <h2 style="margin: 0 0 12px; font-size: 16px;">Subjects & Grades</h2>
+        <table style="
+          width:100%;
+          border-collapse:collapse;
+          font-size:13px;
+          overflow:hidden;
+          border-radius:10px;
+        ">
+          <thead>
+            <tr style="background:#0f172a; color:white;">
+              <th style="padding:10px; text-align:left;">#</th>
+              <th style="padding:10px; text-align:left;">Subject</th>
+              <th style="padding:10px; text-align:left;">Credits</th>
+              <th style="padding:10px; text-align:left;">Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${subjectRows}
+          </tbody>
+        </table>
+
+        <hr style="margin:18px 0; border:none; border-top:1px solid #e2e8f0;" />
+
+        <h2 style="margin: 0 0 10px; font-size: 16px;">Result Summary</h2>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <div style="flex:1; min-width:160px; padding:12px; background:#f1f5f9; border-radius:12px;">
+            <div style="font-size:12px; color:#475569;">Total Credits</div>
+            <div style="font-size:20px; font-weight:800;">${cur.totalCredits || "N/A"}</div>
+          </div>
+
+          <div style="flex:1; min-width:160px; padding:12px; background:#f1f5f9; border-radius:12px;">
+            <div style="font-size:12px; color:#475569;">Credit Points</div>
+            <div style="font-size:20px; font-weight:800;">${cur.creditPoints || "N/A"}</div>
+          </div>
+
+          <div style="flex:1; min-width:160px; padding:12px; background:#e0f2fe; border-radius:12px;">
+            <div style="font-size:12px; color:#075985;">SGPA</div>
+            <div style="font-size:20px; font-weight:900; color:#0369a1;">${cur.sgpa}</div>
+          </div>
+        </div>
+
+        <p style="margin-top:20px; font-size:11px; color:#64748b;">
+          ⚠️ Disclaimer: This PDF is auto-generated and unofficial. Values are calculated using input data.
+        </p>
+
+      </div>
+    `;
+
+    // ✅ show template (for rendering)
+    pdfBox.style.display = "block";
+
+    // ✅ PDF options
+    const opt = {
+      margin: 0.3,
+      filename: `MAKAUT_GradeCard_Sem${currentSemester}_${studentName.replaceAll(" ", "_")}.pdf`,
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+    };
+
+    html2pdf()
+      .set(opt)
+      .from(pdfBox)
+      .save()
+      .then(() => {
+        // hide again after save
+        pdfBox.style.display = "none";
+      });
+
+  } catch (err) {
+    console.error(err);
+    alert("PDF generation failed.");
+  }
+}
+

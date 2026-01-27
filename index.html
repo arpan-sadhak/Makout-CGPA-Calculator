@@ -8,6 +8,7 @@
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.8/dist/purify.min.js"></script>
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
@@ -176,7 +177,7 @@
 <br/><br/>
     <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 text-center">
       <div class="stat">
-        <p>Total Credits</p>
+        <p>Total Credits</p> 
         <span id="totalCredits"></span>
       </div>
 
@@ -201,10 +202,14 @@
       </div>
     </div> 
   </section>
-<section id="aiResult" class="card hidden">
+  <section id="aiResult" class="card hidden">
   <h2 class="section-title">🤖 AI SGPA Improvement Report</h2>
-  <pre id="aiText" class="whitespace-pre-wrap text-sm"></pre>
+
+  <!-- AI HTML output will be injected here -->
+  <div id="aiText"></div>
 </section>
+
+
 
 
 </main>
@@ -222,8 +227,9 @@
 
 
 <footer class="footer">
-  Unofficial Academic Tool • Built for MAKAUT Students • Build By Puskar Nath • 
-
+  Unofficial Academic Tool • Built for MAKAUT Students • Build By Puskar Nath & Team Hash Rocket• 
+  <div id="pdfTemplate" style="display:none;"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>
